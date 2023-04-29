@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './index.module.css';
+import style from './index.module.scss';
 import Nav from '../../component/nav';
 import { useAppSelector, useAppDispatch } from '../../slices/hooks';
 import { decrement, increment } from '../../slices/couterSlice'
@@ -14,10 +14,8 @@ const About = () => {
         <div className={style.mainb} style={{ width: '100%' }}>
             <Nav></Nav>
             <div style={{ width: '500px', margin: '0 auto', paddingTop: '5rem' }}>
-                <button onClick={() => { dispatch(increment()) }}>+1</button>
-                <button onClick={() => { dispatch(decrement()) }}>-1</button>
-                <button onClick={() => { dispatch(toggleswitch()) }}>toggle</button>
-                <p onClick={() => { router.push('profile') }}>點我點我</p>
+
+                <p onClick={() => { router.push('about') }}>點我點我</p>
             </div>
 
         </div>

@@ -1,5 +1,5 @@
-import React, { FormEvent, useState } from 'react';
-import style from './index.module.css';
+import React, { FormEvent, useState, useEffect } from 'react';
+import style from './index.module.scss';
 import Nav from '../../component/nav';
 import { useAppSelector, useAppDispatch } from '../../slices/hooks';
 import { decrement, increment } from '../../slices/couterSlice';
@@ -26,23 +26,27 @@ const About = ({ data }: About) => {
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    const verify = () => {
-
-    }
 
     const login = async () => {
         try {
             const res = await axios({
                 method: 'post',
-                url: 'https://fakestoreapi.com/auth/login',
+                // url: 'https://fakestoreapi.com/auth/login',
+                url: 'http://18.180.112.254/api/backstage/no-auth/login',
                 data: {
-                    username: val.account,
+                    // username: val.account,
+                    account: val.account,
                     password: val.password
                 }
             })
             const data = res.data;
-            console.log(data.token)
-            Cookies.set('jwt', data.token)
+            // console.log(data.payload)
+            // Cookies.set('jwt', data.token)
+            if (data.payload !== undefined) {
+                Cookies.set('jwt', data.payload)
+            }
+
+            router.push('profile')
         } catch (e) {
             console.log(e)
         }
@@ -55,10 +59,17 @@ const About = ({ data }: About) => {
     // const a: any = JSON.stringify(Cookies.get('jwt'))
     // console.log(JSON.parse(a))
 
+    useEffect(() => {
+        const cookie = Cookies.get('jwt');
+        if (cookie === 'undefined') {
+            Cookies.remove('jwt')
+        }
+    }, []);
+
     return (
-        <div className={style.mainb} style={{ width: '100%' }}>
+        <div className={style.mainc} style={{ width: '100%' }}>
             <Nav></Nav>
-            <div style={{ width: '500px', margin: '0 auto', paddingTop: '5rem' }}>
+            <div className={style.dd} style={{ width: '500px', margin: '0 auto', paddingTop: '5rem' }}>
                 <button onClick={() => { dispatch(increment()) }}>+1</button>
                 <button onClick={() => { dispatch(decrement()) }}>-1</button>
                 <button onClick={() => { dispatch(toggleswitch()) }}>toggle</button>

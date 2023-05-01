@@ -5,7 +5,7 @@ import { toggleswitch } from '../slices/toggleSlice'
 const Nav = () => {
     const count = useAppSelector(state => state.counter.value)
     const toggle = useAppSelector(state => state.toggle.toggle)
-    console.log(toggle)
+    // console.log(toggle)
     const dispatch = useAppDispatch()
     return (
 

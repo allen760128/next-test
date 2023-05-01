@@ -27,6 +27,19 @@ const About = ({ data }: About) => {
     const router = useRouter()
 
 
+    const user = async () => {
+        try {
+            const res = await axios({
+                method: 'get',
+                url: 'https://fakestoreapi.com/users/1'
+            })
+            const data = res.data;
+            console.log(data);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     const login = async () => {
         try {
             const res = await axios({
@@ -44,6 +57,7 @@ const About = ({ data }: About) => {
             // Cookies.set('jwt', data.token)
             if (data.payload !== undefined) {
                 Cookies.set('jwt', data.payload)
+                user()
             }
 
             router.push('profile')

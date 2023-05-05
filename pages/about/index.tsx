@@ -35,6 +35,7 @@ const About = ({ data }: About) => {
             })
             const data = res.data;
             console.log(data);
+            router.push('profile')
         } catch (e) {
             console.log(e);
         }
@@ -58,9 +59,10 @@ const About = ({ data }: About) => {
             if (data.payload !== undefined) {
                 Cookies.set('jwt', data.payload)
                 user()
+
             }
 
-            router.push('profile')
+
         } catch (e) {
             console.log(e)
         }
@@ -105,6 +107,7 @@ const About = ({ data }: About) => {
                 </div>
                 <button>submit</button>
             </form>
+
         </div>
     )
 }
